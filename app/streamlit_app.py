@@ -278,12 +278,9 @@ if run_query:
                         )
                     )
 
-            except requests.exceptions.ConnectionError:
+            except requests.exceptions.ConnectionError as error:
 
-                st.error(
-                    "FastAPI server is not running. "
-                    "Please try again later."
-                )
+                st.error(f"Could not connect to the API: {error}")
 
             except requests.exceptions.Timeout:
 
