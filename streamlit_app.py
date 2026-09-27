@@ -19,13 +19,11 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-    /* Main background */
     .stApp {
         background: #0b1020;
         color: #e8ecf7;
     }
 
-    /* Hide Streamlit branding */
     #MainMenu {
         visibility: hidden;
     }
@@ -38,13 +36,11 @@ st.markdown("""
         visibility: hidden;
     }
 
-    /* Sidebar */
     section[data-testid="stSidebar"] {
         background: #11182b;
         border-right: 1px solid #202a44;
     }
 
-    /* Main content */
     .main-title {
         font-size: 42px;
         font-weight: 700;
@@ -58,7 +54,6 @@ st.markdown("""
         margin-bottom: 35px;
     }
 
-    /* Hero box */
     .hero {
         background: linear-gradient(135deg, #151f38, #10172b);
         border: 1px solid #263452;
@@ -78,7 +73,6 @@ st.markdown("""
         font-size: 15px;
     }
 
-    /* SQL box heading */
     .section-title {
         font-size: 18px;
         font-weight: 600;
@@ -86,7 +80,6 @@ st.markdown("""
         margin-bottom: 10px;
     }
 
-    /* Status */
     .status {
         display: inline-block;
         padding: 6px 12px;
@@ -97,7 +90,6 @@ st.markdown("""
         margin-bottom: 15px;
     }
 
-    /* Example questions */
     .example {
         background: #151e33;
         border: 1px solid #263452;
@@ -221,16 +213,12 @@ if run_query:
             try:
 
                 response = requests.get(
-                    "http://127.0.0.1:8000/query",
+                    "https://genai-text-to-sql.onrender.com/query",
                     params={"question": question},
-                    timeout=120 
+                    timeout=120
                 )
 
                 result = response.json()
-
-                # -------------------------------
-                # SUCCESS
-                # -------------------------------
 
                 if result.get("status") == "success":
 
@@ -239,7 +227,6 @@ if run_query:
                         unsafe_allow_html=True
                     )
 
-                    # SQL
                     st.markdown(
                         '<div class="section-title">Generated SQL</div>',
                         unsafe_allow_html=True
@@ -250,7 +237,6 @@ if run_query:
                         language="sql"
                     )
 
-                    # Results
                     st.markdown(
                         '<div class="section-title">Query Results</div>',
                         unsafe_allow_html=True
@@ -274,10 +260,6 @@ if run_query:
 
                         st.info("The query returned no results.")
 
-                # -------------------------------
-                # CLARIFICATION
-                # -------------------------------
-
                 elif result.get("status") == "clarification_required":
 
                     st.warning(
@@ -286,10 +268,6 @@ if run_query:
                             "Could you provide more details?"
                         )
                     )
-
-                # -------------------------------
-                # ERROR
-                # -------------------------------
 
                 else:
 
@@ -300,11 +278,11 @@ if run_query:
                         )
                     )
 
-            except requests.exceptions.ConnectionError:
+            except requests.exceptions.ConnectionError as error:
 
                 st.error(
-                    "FastAPI server is not running. "
-                    "Start the API and try again."
+                    f"Could not connect to the FastAPI API. "
+                    f"Please try again later.\n\nDetails: {error}"
                 )
 
             except requests.exceptions.Timeout:
