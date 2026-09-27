@@ -26,6 +26,8 @@ Rules:
 4. Return only the SQL query.
 5. Do not include markdown code fences.
 6. Do not add explanations.
+7. For text/string comparisons, use case-insensitive matching when appropriate,
+   for example LOWER(column) = LOWER('value').
 
 User question:
 {question}
