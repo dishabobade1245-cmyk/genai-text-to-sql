@@ -22,6 +22,37 @@ The application uses Gemini to convert the natural-language question into a Post
 - Streamlit interactive dashboard
 - Structured query results
 - Error handling for Gemini API failures and rate limits
+- Cloud deployment with Neon PostgreSQL and Render
+
+---
+
+## Tech Stack
+
+### Backend
+- Python
+- FastAPI
+- Uvicorn
+
+### GenAI
+- Google Gemini API
+
+### Database
+- PostgreSQL
+- Neon
+
+### Frontend
+- Streamlit
+
+### API & Configuration
+- REST API
+- Environment variables
+- python-dotenv
+
+### Development & Deployment
+- Git
+- GitHub
+- Render
+- Streamlit Community Cloud
 
 ---
 
@@ -49,7 +80,7 @@ Generated SQL
 SQL Validator
   |
   v
-PostgreSQL
+Neon PostgreSQL
   |
   v
 Query Results
